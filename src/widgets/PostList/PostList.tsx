@@ -7,14 +7,22 @@ import { filterByLength } from '../../features/PostLengthFilter/lib/ filterByLen
 import { PostLengthFilter } from '../../features/PostLengthFilter/ui/PostLengthFilter .tsx';
 import { useDebounce } from '../../shared/lib/hooks/useDebounce.ts';
 import { withLoading } from '../../shared/lib/hoc/withLoading.tsx';
+import { useParams } from 'react-router-dom';
 
 // eslint-disable-next-line react-refresh/only-export-components
 const PostList = () => {
+  const { id } = useParams();
+
   useEffect(() => {
     // Для будущего получения данных по api
   }, []);
 
-  const posts = defaultPostsData;
+  let posts = defaultPostsData;
+
+  if (id) {
+    posts = posts.filter((post) => post.authorId === id);
+  }
+
   const [titleLength, setTitleLength] = useState<number>(0);
 
   const debouncedTitleLength = useDebounce(titleLength, 500);
@@ -43,16 +51,20 @@ const PostList = () => {
         />
       </div>
       <ul className={styles.postList}>
-        {filteredPosts.map((post) => (
-          <li key={post.id} className={styles.postCardListItem}>
-            <PostCard
-              key={post.id}
-              post={post}
-              showComments={visibleComments[post.id]}
-              toggleComments={toggleComments}
-            />
-          </li>
-        ))}
+        {filteredPosts.length > 0 ? (
+          filteredPosts.map((post) => (
+            <li key={post.id} className={styles.postCardListItem}>
+              <PostCard
+                key={post.id}
+                post={post}
+                showComments={visibleComments[post.id]}
+                toggleComments={toggleComments}
+              />
+            </li>
+          ))
+        ) : (
+          <h4>У данного пользователя нет постов</h4>
+        )}
       </ul>
     </div>
   );

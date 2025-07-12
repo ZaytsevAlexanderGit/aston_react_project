@@ -1,0 +1,30 @@
+.userTabsAll {
+  display: flex;
+  padding: 10px 0;
+  justify-content: space-between;
+}
+
+.userTabsAllNav {
+  display: flex;
+  gap: 10px;
+}
+
+.userTabsLink {
+  padding: 10px;
+  border-radius: 12px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  outline: 1px solid black;
+
+  text-decoration: none;
+  transition: all 0.3s;
+
+  &:hover:not(.active) {
+    background-color: var(--button-hover-color);
+  }
+}
+
+.userTabsLinkActive {
+  background-color: gray;
+  color: var(--text-color);
+}

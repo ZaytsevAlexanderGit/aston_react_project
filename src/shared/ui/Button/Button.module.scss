@@ -7,7 +7,7 @@
 
     padding: 8px 12px;
     border-radius: 8px;
-    border:1px solid var(--text-color);
+    border:1px solid black;
     cursor: pointer;
     transition: box-shadow 0.4s;
 
@@ -31,10 +31,12 @@
 
 .showComments {
     align-self: end;
+    border:1px solid var(--text-color);
 }
 
 .showPost {
     padding:5px;
     border-radius: 6px;
     align-self: end;
+    border:1px solid var(--text-color);
 }
