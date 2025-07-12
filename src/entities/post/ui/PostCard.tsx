@@ -1,14 +1,22 @@
-import React, { type FC, useEffect, useRef, useState } from 'react';
+import React, {
+  type FC,
+  type SyntheticEvent,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import styles from './PostCard.module.scss';
 import type { PostProps } from '../types/types.ts';
 import { Button } from '../../../shared/ui/Button/Button.tsx';
 import clsx from 'clsx';
 import { CommentList } from '../../../widgets/CommentList/CommentList.tsx';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { getCommentAuthorName } from '../../../shared/lib/utils.ts';
 
 type PostCardProps = {
   post: PostProps;
   showComments: boolean;
-  toggleComments: (postId: string) => void;
+  toggleComments?: (postId: string) => void;
 };
 
 export const PostCard: FC<PostCardProps> = React.memo(function PostCard({
@@ -16,28 +24,63 @@ export const PostCard: FC<PostCardProps> = React.memo(function PostCard({
   showComments,
   toggleComments,
 }) {
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  const handlePostClick = (e: SyntheticEvent) => {
+    if (!id) {
+      e.preventDefault();
+      e.stopPropagation();
+      navigate(`/posts/${post.id}`);
+    }
+  };
+
   const [expanded, setExpanded] = useState(false);
   const [showButton, setShowButton] = useState(false);
   const contentRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
     if (contentRef.current) {
-      const isTruncated =
-        contentRef.current.scrollHeight > contentRef.current.clientHeight;
-
-      setShowButton(isTruncated);
+      if (id !== undefined) {
+        setShowButton(false);
+        setExpanded(true);
+      } else {
+        const isTruncated =
+          contentRef.current.scrollHeight > contentRef.current.clientHeight;
+        setShowButton(isTruncated);
+      }
     }
   }, [post.postBody]);
 
-  const toggleExpand = () => {
+  const toggleExpandHandler = (e: SyntheticEvent<Element, Event>) => {
+    e.stopPropagation();
     setExpanded(!expanded);
   };
 
+  const toggleCommentsHandler = (e: SyntheticEvent<Element, Event>) => {
+    e.stopPropagation();
+    if (toggleComments) toggleComments(post.id);
+  };
+
+  const postAuthor = getCommentAuthorName({ id: post.authorId });
+
   return (
-    <li className={styles.postCardListItem}>
-      <article className={styles.postCard}>
-        <h3 className={styles.postTitle}>{post.title}</h3>
-        <div className={styles.postCardBodyWrapper}>
+    <article className={styles.postCard}>
+      <Link
+        to={`/users/${post.authorId}/posts`}
+        className={styles.postCard__author}
+      >
+        {postAuthor}
+      </Link>
+      <div className={styles.postCardWrapper}>
+        <div
+          onClick={handlePostClick}
+          className={clsx(
+            styles.postCardBodyWrapper,
+            id ? styles.postCardBodyWrapperDisableHover : ''
+          )}
+        >
+          <h3 className={styles.postTitle}>{post.title}</h3>
           <p
             ref={contentRef}
             className={clsx(
@@ -47,23 +90,28 @@ export const PostCard: FC<PostCardProps> = React.memo(function PostCard({
           >
             {post.postBody}
           </p>
-          {showButton && (
-            <Button buttonType={'showPost'} onClick={toggleExpand}>
-              {expanded ? 'Скрыть' : 'Показать больше'}
-            </Button>
-          )}
         </div>
-        <div className={styles.commentsBlockWrapper}>
-          <Button
-            buttonType={'showComments'}
-            children={
-              showComments ? 'Скрыть комментарии' : 'Показать комментарии'
-            }
-            onClick={() => toggleComments(post.id)}
-          />
-          {showComments && <CommentList post={post} />}
-        </div>
-      </article>
-    </li>
+        {showButton && (
+          <Button buttonType={'showPost'} onClick={toggleExpandHandler}>
+            {expanded ? 'Скрыть' : 'Показать больше'}
+          </Button>
+        )}
+
+        {toggleComments ? (
+          <div className={styles.commentsBlockWrapper}>
+            <Button
+              buttonType={'showComments'}
+              children={
+                showComments ? 'Скрыть комментарии' : 'Показать комментарии'
+              }
+              onClick={toggleCommentsHandler}
+            />
+            {showComments && <CommentList post={post} />}
+          </div>
+        ) : (
+          <CommentList post={post} />
+        )}
+      </div>
+    </article>
   );
 });

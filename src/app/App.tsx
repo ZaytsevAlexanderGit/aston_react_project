@@ -1,16 +1,9 @@
 import './App.css';
-import { MainLayout } from '../shared/MainLayout.tsx';
-import { PostList } from '../widgets';
-import { withLoading } from '../shared/lib/hoc/withLoading.tsx';
+import { RouterProvider } from 'react-router-dom';
+import { router } from './providers/router/router.tsx';
 
 function App() {
-  const PostListWithLoading = withLoading(PostList);
-
-  return (
-    <MainLayout>
-      <PostListWithLoading />
-    </MainLayout>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

@@ -6,8 +6,10 @@ import type { VisibleComments } from '../../entities/post/types/types.ts';
 import { filterByLength } from '../../features/PostLengthFilter/lib/ filterByLength.ts';
 import { PostLengthFilter } from '../../features/PostLengthFilter/ui/PostLengthFilter .tsx';
 import { useDebounce } from '../../shared/lib/hooks/useDebounce.ts';
+import { withLoading } from '../../shared/lib/hoc/withLoading.tsx';
 
-export const PostList = () => {
+// eslint-disable-next-line react-refresh/only-export-components
+const PostList = () => {
   useEffect(() => {
     // Для будущего получения данных по api
   }, []);
@@ -42,14 +44,19 @@ export const PostList = () => {
       </div>
       <ul className={styles.postList}>
         {filteredPosts.map((post) => (
-          <PostCard
-            key={post.id}
-            post={post}
-            showComments={visibleComments[post.id]}
-            toggleComments={toggleComments}
-          />
+          <li key={post.id} className={styles.postCardListItem}>
+            <PostCard
+              key={post.id}
+              post={post}
+              showComments={visibleComments[post.id]}
+              toggleComments={toggleComments}
+            />
+          </li>
         ))}
       </ul>
     </div>
   );
 };
+const withLoadingPostList = withLoading(PostList);
+
+export default withLoadingPostList;
