@@ -1,5 +1,7 @@
-import PostList from '../../widgets/PostList/PostList.tsx';
+import { PostList } from '../../widgets/PostList/PostList.tsx';
+import { withLoading } from '../../shared/lib/hoc/withLoading.tsx';
 
 export const PostsPage = () => {
-  return <PostList />;
+  const PostListWithLoading = withLoading(PostList);
+  return <PostListWithLoading />;
 };

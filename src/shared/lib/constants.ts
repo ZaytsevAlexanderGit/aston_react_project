@@ -1,4 +1,5 @@
-import type { Author, PostProps } from './types/types.ts';
+import type { Author, PostProps } from '../../entities/post/types/types.ts';
+import type { AlbumsProps, TodosProps } from './types.ts';
 
 export const defaultAuthorsData: Author[] = [
   { id: '00001', name: 'Elena Vasquez' },
@@ -211,6 +212,158 @@ export const defaultPostsData: PostProps[] = [
         commentText: 'Hmmm...',
         authorId: '00004',
         date: new Date('2025-04-06T10:30:00'),
+      },
+    ],
+  },
+];
+
+export const defaultTodosData: TodosProps[] = [
+  {
+    id: 'Todo_1',
+    authorId: '00001',
+    todoTitle: 'Выучть JS.',
+    todoBody: 'Необходимо повторить JS перед экзаменом.',
+    isComplete: false,
+  },
+  {
+    id: 'Todo_2',
+    authorId: '00002',
+    todoTitle: 'Выучть JS быстро.',
+    todoBody: 'Необходимо повторить JS перед экзаменом.',
+    isComplete: false,
+  },
+
+  {
+    id: 'Todo_3',
+    authorId: '00003',
+    todoTitle: 'Выучть JS быыстро.',
+    todoBody: 'Необходимо повторить JS перед экзаменом.',
+    isComplete: false,
+  },
+
+  {
+    id: 'Todo_4',
+    authorId: '00004',
+    todoTitle: 'Выучть JS быыыстро.',
+    todoBody: 'Необходимо повторить JS перед экзаменом.',
+    isComplete: false,
+  },
+  {
+    id: 'Todo_5',
+    authorId: '00005',
+    todoTitle: 'Выучть JS быыыыстро.',
+    todoBody: 'Необходимо повторить JS перед экзаменом.',
+    isComplete: false,
+  },
+  {
+    id: 'Todo_6',
+    authorId: '00006',
+    todoTitle: 'Выучть JS быыыыыстро.',
+    todoBody: 'Необходимо повторить JS перед экзаменом.',
+    isComplete: false,
+  },
+  {
+    id: 'Todo_7',
+    authorId: '00001',
+    todoTitle: 'Сделать ДЗ.',
+    todoBody: 'Необходимо сделать ДЗ №3 до дедлайна.',
+    isComplete: true,
+  },
+  {
+    id: 'Todo_8',
+    authorId: '00002',
+    todoTitle: 'Сделать ДЗ быстро.',
+    todoBody: 'Необходимо сделать ДЗ №3 до дедлайна.',
+    isComplete: false,
+  },
+
+  {
+    id: 'Todo_9',
+    authorId: '00003',
+    todoTitle: 'Сделать ДЗ быыстро.',
+    todoBody: 'Необходимо сделать ДЗ №3 до дедлайна.',
+    isComplete: true,
+  },
+
+  {
+    id: 'Todo_10',
+    authorId: '00004',
+    todoTitle: 'Сделать ДЗ быыыстро.',
+    todoBody: 'Необходимо сделать ДЗ №3 до дедлайна.',
+    isComplete: false,
+  },
+  {
+    id: 'Todo_11',
+    authorId: '00005',
+    todoTitle: 'Сделать ДЗ быыыыстро.',
+    todoBody: 'Необходимо сделать ДЗ №3 до дедлайна.',
+    isComplete: false,
+  },
+  {
+    id: 'Todo_12',
+    authorId: '00006',
+    todoTitle: 'Сделать ДЗ быыыыыстро.',
+    todoBody: 'Необходимо сделать ДЗ №3 до дедлайна.',
+    isComplete: true,
+  },
+];
+
+export const defaultAlbumsData: AlbumsProps[] = [
+  {
+    albumId: '0001',
+    albumTitle: 'Travel',
+    albumCover:
+      'https://images.unsplash.com/photo-1500835556837-99ac94a94552?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dHJhdmVsfGVufDB8fDB8fHww',
+    albumItems: [
+      {
+        id: '00001',
+        name: 'Start Flight',
+        url: 'https://images.unsplash.com/photo-1725202058834-405b9a6a95c4?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      },
+      {
+        id: '00002',
+        name: 'End Flight',
+        url: 'https://images.unsplash.com/photo-1659653156777-ada9aa338a79?q=80&w=743&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      },
+      {
+        id: '00003',
+        name: 'Hotel',
+        url: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      },
+
+      {
+        id: '00004',
+        name: 'Beach!!!',
+        url: 'https://plus.unsplash.com/premium_photo-1669750817438-3f7f3112de8d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8QmVhY2h8ZW58MHx8MHx8fDA%3D',
+      },
+    ],
+  },
+  {
+    albumId: '0002',
+    albumTitle: 'Family',
+    albumCover:
+      'https://images.unsplash.com/photo-1504439268584-b72c5019471e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGZhbWlseXxlbnwwfHwwfHx8MA%3D%3D',
+    albumItems: [
+      {
+        id: '00001',
+        name: 'Grandfather',
+        url: 'https://images.unsplash.com/photo-1472066719480-ecc7314ed065?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Z3JhbmRmYXRoZXJ8ZW58MHx8MHx8fDA%3D',
+      },
+      {
+        id: '00002',
+        name: 'Grandmother',
+        url: 'https://images.unsplash.com/photo-1498757581981-8ddb3c0b9b07?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Z3JhbmRtb3RoZXJ8ZW58MHx8MHx8fDA%3D',
+      },
+      {
+        id: '00003',
+        name: 'Father',
+        url: 'https://plus.unsplash.com/premium_photo-1661520725228-245d8b291b1b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWFuJTIwNDAlMjB5ZWFyc3xlbnwwfHwwfHx8MA%3D%3D',
+      },
+
+      {
+        id: '00004',
+        name: 'Mother',
+        url: 'https://plus.unsplash.com/premium_photo-1661424100532-a5d5b3210f47?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8d29tYW4lMjA0MCUyMHllYXJzfGVufDB8fDB8fHww',
       },
     ],
   },

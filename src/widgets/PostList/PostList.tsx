@@ -1,27 +1,22 @@
 import styles from './PostList.module.scss';
 import { PostCard } from '../../entities/post/ui/PostCard.tsx';
-import { defaultPostsData } from '../../entities/post/constants.ts';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import type { VisibleComments } from '../../entities/post/types/types.ts';
 import { filterByLength } from '../../features/PostLengthFilter/lib/ filterByLength.ts';
 import { PostLengthFilter } from '../../features/PostLengthFilter/ui/PostLengthFilter .tsx';
 import { useDebounce } from '../../shared/lib/hooks/useDebounce.ts';
-import { withLoading } from '../../shared/lib/hoc/withLoading.tsx';
-import { useParams } from 'react-router-dom';
+import { usePosts } from '../../features/PostList/model/hooks/usePosts.ts';
 
-// eslint-disable-next-line react-refresh/only-export-components
-const PostList = () => {
-  const { id } = useParams();
+type PostListProps = {
+  userId?: string;
+};
 
+export const PostList = ({ userId }: PostListProps) => {
   useEffect(() => {
     // Для будущего получения данных по api
   }, []);
 
-  let posts = defaultPostsData;
-
-  if (id) {
-    posts = posts.filter((post) => post.authorId === id);
-  }
+  const posts = usePosts({ userId });
 
   const [titleLength, setTitleLength] = useState<number>(0);
 
@@ -69,6 +64,3 @@ const PostList = () => {
     </div>
   );
 };
-const withLoadingPostList = withLoading(PostList);
-
-export default withLoadingPostList;

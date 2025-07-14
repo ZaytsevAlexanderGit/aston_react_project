@@ -1,4 +1,4 @@
-import { defaultAuthorsData } from '../../entities/post/constants.ts';
+import { defaultAuthorsData } from './constants.ts';
 
 export const getCommentAuthorName = ({
   id,

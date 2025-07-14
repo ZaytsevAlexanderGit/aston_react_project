@@ -1,12 +1,20 @@
 .userTabsAll {
   display: flex;
-  padding: 10px 0;
   justify-content: space-between;
+  gap:10px;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
 }
 
 .userTabsAllNav {
   display: flex;
   gap: 10px;
+
+  @media (max-width: 600px) {
+    justify-content: center;
+  }
 }
 
 .userTabsLink {
@@ -17,7 +25,6 @@
   outline: 1px solid black;
 
   text-decoration: none;
-  transition: all 0.3s;
 
   &:hover:not(.active) {
     background-color: var(--button-hover-color);
@@ -27,4 +34,12 @@
 .userTabsLinkActive {
   background-color: gray;
   color: var(--text-color);
+}
+
+.userTabsLinkBack {
+  @media (max-width: 600px) {
+    max-inline-size: 300px;
+    inline-size: 100%;
+    align-self: center ;
+  }
 }

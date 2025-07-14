@@ -1,5 +1,4 @@
 import styles from './Header.module.scss';
-import { ThemeSwitcher } from '../../features/ThemeSwitcher/ui/ThemSwitcher.tsx';
 import { Modal } from '../../shared/ui/Modal/Modal.tsx';
 import { useState } from 'react';
 import { Button } from '../../shared/ui/Button/Button.tsx';
@@ -13,7 +12,6 @@ export const Header = () => {
 
   return (
     <header className={styles.headerWrapper}>
-      <ThemeSwitcher />
       <h1 className={styles.header}>React интенсив: Домашнее Задание.</h1>
       <Button buttonType={'secondary'} onClick={handleToggleModal}>
         Информация о проекте
@@ -25,9 +23,13 @@ export const Header = () => {
             body: (
               <ol className={styles.modalText}>
                 <li>Приложение, с отрисовкой списка постов.</li>
-                <li>Реализованно переключение светлои и темной тем.</li>
                 <li>
                   Реализовано модальное окно, которое Вы сейчас наблюдаете.
+                </li>
+                <li>К постам добавлены авторы и комментарии.</li>
+                <li>
+                  Добавлен роутинг. Есть возможность попасть на автора поста или
+                  комментария и посмотреть его личный кабинет.
                 </li>
               </ol>
             ),
