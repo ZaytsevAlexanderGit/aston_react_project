@@ -1,12 +1,8 @@
-import type { PostCommentProps } from '../../comment/types/types.ts';
-
 export type PostProps = {
-  number: number;
+  userId: string;
   id: string;
-  authorId: string;
   title: string;
-  postBody: string;
-  comments: PostCommentProps[];
+  body: string;
 };
 
 export type VisibleComments = Record<string, boolean>;
@@ -14,4 +10,12 @@ export type VisibleComments = Record<string, boolean>;
 export type Author = {
   id: string;
   name: string;
+};
+
+export type CommentProps = {
+  postId: string;
+  id: string;
+  name: string;
+  email: string;
+  body: string;
 };
