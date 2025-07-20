@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_URL } from '../../../config/api-config.ts';
-import type { PhotoProps } from '../types/types.ts';
+import type { PhotoProps } from '../../user/types/types.ts';
 
 export const photosApi = createApi({
   reducerPath: 'photosApi',

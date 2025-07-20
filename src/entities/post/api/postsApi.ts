@@ -11,6 +11,7 @@ export const postsApi = createApi({
   endpoints: (build) => ({
     getAllPosts: build.query<PostProps[], void>({
       query: () => 'posts/',
+
       providesTags: ['Posts'],
     }),
     getPostById: build.query<PostProps, string>({

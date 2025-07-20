@@ -13,7 +13,7 @@ export const commentsApi = createApi({
       query: () => `comments`,
       providesTags: ['Comments'],
     }),
-    getCommentById: build.query<CommentProps, string>({
+    getCommentById: build.query<CommentProps, number>({
       query: (commentId) => `comments/${commentId}`,
       providesTags: (result, error, id) => {
         if (error) {
@@ -22,7 +22,7 @@ export const commentsApi = createApi({
         return result ? [{ type: 'Comments', id: id }] : [];
       },
     }),
-    getCommentsByPostId: build.query<CommentProps, string>({
+    getCommentsByPostId: build.query<CommentProps[], number>({
       query: (postId) => `posts/${postId}/comments`,
       providesTags: (result, error, id) => {
         if (error) {
