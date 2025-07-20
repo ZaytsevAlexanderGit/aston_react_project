@@ -1,9 +1,4 @@
-export type PostCommentProps = {
-  id: string;
-  commentText: string;
-  author: string;
-  date: Date;
-};
+import type { PostCommentProps } from '../../comment/types/types.ts';
 
 export type PostProps = {
   number: number;
