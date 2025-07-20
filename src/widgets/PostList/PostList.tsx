@@ -11,7 +11,7 @@ type PostListProps = {
   userId?: string;
 };
 
-export const PostList = ({ userId }: PostListProps) => {
+const PostList = ({ userId }: PostListProps) => {
   useEffect(() => {
     // Для будущего получения данных по api
   }, []);
@@ -64,3 +64,5 @@ export const PostList = ({ userId }: PostListProps) => {
     </div>
   );
 };
+
+export default PostList;

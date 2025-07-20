@@ -1,4 +1,4 @@
-import type { Dispatch, SetStateAction } from 'react';
+import React, { type Dispatch, type SetStateAction } from 'react';
 
 import styles from './PostLengthFilter.module.scss';
 
@@ -11,6 +11,9 @@ export const PostLengthFilter = ({
   titleLength,
   setTitleLength,
 }: PostLengthFilterProps) => {
+  const setLengthFilterHandler = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setTitleLength(Number(e.target.value));
+
   return (
     <div className={styles.postFilter}>
       <div className={styles.filterControls}>
@@ -24,7 +27,7 @@ export const PostLengthFilter = ({
           min="0"
           max="50"
           value={titleLength}
-          onChange={(e) => setTitleLength(Number(e.target.value))}
+          onChange={setLengthFilterHandler}
         />
       </div>
     </div>

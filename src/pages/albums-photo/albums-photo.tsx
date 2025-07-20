@@ -17,7 +17,7 @@ export const AlbumPhotoPage = () => {
 
   return (
     <>
-      <Button buttonType={'secondary'} onClick={handleBack} children={'←'} />
+      <Button buttonType={'secondary'} onClick={handleBack} children="←" />
       <div className={styles.photoListWrapper}>
         <ul className={styles.photoList}>
           {albumPhotos.map((photo) => (
