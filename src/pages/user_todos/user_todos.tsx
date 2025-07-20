@@ -1,31 +1,24 @@
 import styles from './user_todos.module.scss';
-import { useParams } from 'react-router-dom';
-import { defaultTodosData } from '../../shared/lib/constants.ts';
-import clsx from 'clsx';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Todo } from '../../entities/todo/ui/Todo.tsx';
+import { useGetTodosByUserIdQuery } from '../../entities/todo/api/todosApi.ts.ts';
 
 export const UserPageTodos = () => {
   const { id: userId } = useParams();
+  const navigate = useNavigate();
 
-  const userTodos = defaultTodosData.filter((todo) => todo.authorId === userId);
+  if (!userId) navigate('/posts');
 
-  return (
+  const { data: userTodos = [], isLoading } = useGetTodosByUserIdQuery(userId!);
+
+  return isLoading ? (
+    <h3>Загрузка...</h3>
+  ) : (
     <div className={styles.todosListWrapper}>
       <ul className={styles.todosList}>
         {userTodos.map((todo) => (
           <li className={styles.todoItem} key={todo.id}>
-            <label className={styles.todoCheck}>
-              <input
-                id="todoCheckBox"
-                className={styles.todoItemCheckBox}
-                type={'checkbox'}
-                defaultChecked={todo.isComplete}
-              />
-              <span className={clsx(styles.checkBox)} />
-            </label>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <h3 className={styles.todoItemTitle}>{todo.todoTitle}</h3>
-              <p className={styles.todoItemBody}>{todo.todoBody}</p>
-            </div>
+            <Todo todo={todo} />
           </li>
         ))}
       </ul>

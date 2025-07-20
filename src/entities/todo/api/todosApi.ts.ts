@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_URL } from '../../../config/api-config.ts';
-import type { TodoProps } from '../../user/types/types.ts';
+import type { TodoProps } from '../types/types.ts';
 
 export const todosApi = createApi({
   reducerPath: 'todosApi',

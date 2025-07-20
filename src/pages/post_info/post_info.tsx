@@ -1,20 +1,31 @@
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { Routes } from '../../app/providers/router/routes.ts';
 import { PostCard } from '../../entities/post/ui/PostCard.tsx';
-import { defaultPostsData } from '../../shared/lib/constants.ts';
 import { Button } from '../../shared/ui/Button/Button.tsx';
+import { useSelector } from 'react-redux';
+import type { AppState } from '../../app/providers/store/store.ts';
+import { postsSelectors } from '../../entities/post/model/slice/postSlice.ts';
+import { useLoading } from '../../shared/lib/hooks/useLoading.ts';
 
 export const PostInfoPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const post = defaultPostsData.find((post) => post.id === id);
+  if (id === undefined) navigate(-1);
+
+  const loading = useLoading();
+
+  const post = useSelector((state: AppState) =>
+    postsSelectors.selectById(state, +id!)
+  );
 
   const handleBack = () => {
     navigate(-1);
   };
 
-  return post !== undefined ? (
+  return loading ? (
+    <h3>Загрузка...</h3>
+  ) : post !== undefined ? (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
       <Button buttonType={'secondary'} onClick={handleBack} children={'←'} />
       <PostCard post={post} showComments={true} />

@@ -4,5 +4,5 @@ import { useParams } from 'react-router-dom';
 export const UserPagePosts = () => {
   const { id: userId } = useParams();
 
-  return <PostList userId={userId} />;
+  return <PostList userId={userId ? +userId : undefined} />;
 };

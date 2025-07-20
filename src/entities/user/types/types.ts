@@ -21,24 +21,3 @@ export type UserProps = {
     bs: string;
   };
 };
-
-export type AlbumProps = {
-  userId: number;
-  id: number;
-  title: string;
-};
-
-export type PhotoProps = {
-  albumId: number;
-  id: number;
-  title: string;
-  url: string;
-  thumbnailUrl: string;
-};
-
-export type TodoProps = {
-  userId: number;
-  id: number;
-  title: string;
-  completed: boolean;
-};

@@ -1,15 +1,7 @@
-import { defaultPostsData } from '../../../../shared/lib/constants.ts';
+import { useGetAllPostsQuery } from '../../../../entities/post/api/postsApi.ts';
 
-type UsePostType = {
-  userId?: string;
-};
+export const usePosts = () => {
+  const { data: posts } = useGetAllPostsQuery();
 
-export const usePosts = ({ userId }: UsePostType) => {
-  let posts = defaultPostsData;
-
-  if (userId) {
-    posts = posts.filter((post) => post.authorId === userId);
-  }
-
-  return posts;
+  return { posts };
 };

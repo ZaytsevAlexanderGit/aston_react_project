@@ -6,8 +6,3 @@ export type PostProps = {
 };
 
 export type VisibleComments = Record<string, boolean>;
-
-export type Author = {
-  id: string;
-  name: string;
-};

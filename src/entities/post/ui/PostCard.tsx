@@ -11,12 +11,14 @@ import { Button } from '../../../shared/ui/Button/Button.tsx';
 import clsx from 'clsx';
 import { CommentList } from '../../../widgets/CommentList/CommentList.tsx';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { getCommentAuthorName } from '../../../shared/lib/utils.ts';
+import { useSelector } from 'react-redux';
+import { usersSelectors } from '../../user/model/slice/userSlice.ts';
+import type { AppState } from '../../../app/providers/store/store.ts';
 
 type PostCardProps = {
   post: PostProps;
   showComments: boolean;
-  toggleComments?: (postId: string) => void;
+  toggleComments?: (postId: number) => void;
 };
 
 export const PostCard: FC<PostCardProps> = React.memo(function PostCard({
@@ -50,7 +52,7 @@ export const PostCard: FC<PostCardProps> = React.memo(function PostCard({
         setShowButton(isTruncated);
       }
     }
-  }, [post.postBody]);
+  }, [post.body]);
 
   const toggleExpandHandler = (e: SyntheticEvent<Element, Event>) => {
     e.stopPropagation();
@@ -62,12 +64,14 @@ export const PostCard: FC<PostCardProps> = React.memo(function PostCard({
     if (toggleComments) toggleComments(post.id);
   };
 
-  const postAuthor = getCommentAuthorName({ id: post.authorId });
+  const postAuthor = useSelector(
+    (state: AppState) => usersSelectors.selectById(state, post.userId).name
+  );
 
   return (
     <article className={styles.postCard}>
       <Link
-        to={`/users/${post.authorId}/posts`}
+        to={`/users/${post.userId}/posts`}
         className={styles.postCard__author}
       >
         {postAuthor}
@@ -88,7 +92,7 @@ export const PostCard: FC<PostCardProps> = React.memo(function PostCard({
               expanded ? styles.postCardBody__expanded : ''
             )}
           >
-            {post.postBody}
+            {post.body}
           </p>
         </div>
         {showButton && (

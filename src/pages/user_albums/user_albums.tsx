@@ -1,13 +1,22 @@
 import styles from './user_albums.module.scss';
-import { defaultAlbumsData } from '../../shared/lib/constants.ts';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Album } from '../../entities/album/ui/Album.tsx';
+import { useGetAlbumsByUserIdQuery } from '../../entities/album/api/albumsApi.ts';
+import React from 'react';
 
 export const UserPageAlbums = () => {
-  const userAlbums = defaultAlbumsData;
-
+  const { id: userId } = useParams();
   const navigate = useNavigate();
 
-  return (
+  if (!userId) navigate('/posts');
+
+  const { data: userAlbums = [], isLoading } = useGetAlbumsByUserIdQuery(
+    userId!
+  );
+
+  return isLoading ? (
+    <h3>Загрузка...</h3>
+  ) : (
     <div className={styles.albumsListWrapper}>
       <ul className={styles.albumsList}>
         {userAlbums.map((album) => (
@@ -15,17 +24,14 @@ export const UserPageAlbums = () => {
             onClick={(event: React.MouseEvent<HTMLLIElement>) => {
               event.preventDefault();
               event.stopPropagation();
-              navigate(`/albums/${album.albumId}/photos`);
+              navigate(`/albums/${album.id}/photos`, {
+                state: { albumName: album.title },
+              });
             }}
             className={styles.albumsItem}
-            key={album.albumId}
+            key={album.id}
           >
-            <img
-              className={styles.albumCover}
-              src={album.albumCover}
-              alt={album.albumTitle}
-            />
-            <h3 className={styles.albumsItemTitle}>{album.albumTitle}</h3>
+            <Album album={album} />
           </li>
         ))}
       </ul>
