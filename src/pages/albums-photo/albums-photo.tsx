@@ -1,4 +1,9 @@
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import {
+  Navigate,
+  useLocation,
+  useNavigate,
+  useParams,
+} from 'react-router-dom';
 import styles from './albums-photo.module.scss';
 import { Button } from '../../shared/ui/Button/Button.tsx';
 import { Photo } from '../../entities/photo/ui/Photo.tsx';
@@ -46,7 +51,7 @@ export const AlbumPhotoPage = () => {
       <Button buttonType={'secondary'} onClick={handleBack} children={'←'} />
       {isLoading ? (
         <h3>Загрузка...</h3>
-      ) : (
+      ) : albumPhotos.length ? (
         <div className={styles.photoListWrapper}>
           <h3>{albumNameRef.current}</h3>
           <ItemList
@@ -61,6 +66,8 @@ export const AlbumPhotoPage = () => {
             )}
           />
         </div>
+      ) : (
+        <Navigate to={'/posts'} />
       )}
     </>
   );
