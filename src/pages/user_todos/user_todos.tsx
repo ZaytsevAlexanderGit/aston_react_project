@@ -2,6 +2,7 @@ import styles from './user_todos.module.scss';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Todo } from '../../entities/todo/ui/Todo.tsx';
 import { useGetTodosByUserIdQuery } from '../../entities/todo/api/todosApi.ts.ts';
+import { ItemList } from '../../shared/ui/ItemList/ItemList.tsx';
 
 export const UserPageTodos = () => {
   const { id: userId } = useParams();
@@ -15,13 +16,17 @@ export const UserPageTodos = () => {
     <h3>Загрузка...</h3>
   ) : (
     <div className={styles.todosListWrapper}>
-      <ul className={styles.todosList}>
-        {userTodos.map((todo) => (
-          <li className={styles.todoItem} key={todo.id}>
+      <ItemList
+        items={userTodos}
+        keyExtractor={(todo) => todo.id}
+        container={'ul'}
+        extClassName={styles.todosList}
+        renderItem={(todo) => (
+          <li className={styles.todoItem}>
             <Todo todo={todo} />
           </li>
-        ))}
-      </ul>
+        )}
+      />
     </div>
   );
 };

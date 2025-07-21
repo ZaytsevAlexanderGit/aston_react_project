@@ -7,6 +7,7 @@ import { PostLengthFilter } from '../../features/PostLengthFilter/ui/PostLengthF
 import { useDebounce } from '../../shared/lib/hooks/useDebounce.ts';
 import { useSelector } from 'react-redux';
 import { postsSelectors } from '../../entities/post/model/slice/postSlice.ts';
+import { ItemList } from '../../shared/ui/ItemList/ItemList.tsx';
 
 type PostListProps = {
   userId?: number | undefined;
@@ -46,10 +47,14 @@ export const PostList = ({ userId }: PostListProps) => {
           setTitleLength={setTitleLength}
         />
       </div>
-      <ul className={styles.postList}>
-        {filteredPosts.length > 0 ? (
-          filteredPosts.map((post) => (
-            <li key={post.id} className={styles.postCardListItem}>
+      {filteredPosts.length > 0 ? (
+        <ItemList
+          items={filteredPosts}
+          keyExtractor={(post) => post.id}
+          container={'ul'}
+          extClassName={styles.postList}
+          renderItem={(post) => (
+            <li className={styles.postCardListItem}>
               <PostCard
                 key={post.id}
                 post={post}
@@ -57,11 +62,11 @@ export const PostList = ({ userId }: PostListProps) => {
                 toggleComments={toggleComments}
               />
             </li>
-          ))
-        ) : (
-          <h4>У данного пользователя нет постов</h4>
-        )}
-      </ul>
+          )}
+        />
+      ) : (
+        <h4>Нет постов удовлетворяющих фильтру</h4>
+      )}
     </div>
   );
 };
