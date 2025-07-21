@@ -1,9 +1,11 @@
 import styles from './ErrorBoundary.module.scss';
-import React, { type ErrorInfo, type ReactNode } from 'react';
+import React, {
+  type ErrorInfo,
+  type PropsWithChildren,
+  type ReactNode,
+} from 'react';
 
-interface ErrorBoundaryProps {
-  children: ReactNode;
-}
+type ErrorBoundaryProps = PropsWithChildren;
 
 interface ErrorBoundaryState {
   hasError: boolean;

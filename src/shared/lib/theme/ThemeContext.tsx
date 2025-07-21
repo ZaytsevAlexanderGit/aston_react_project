@@ -1,8 +1,12 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, {
+  createContext,
+  type PropsWithChildren,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
-type TThemeContextProviderProps = {
-  children: React.ReactNode;
-};
+type ThemeContextProviderProps = PropsWithChildren;
 
 type ThemeType = 'dark' | 'light';
 
@@ -13,7 +17,7 @@ type ThemeContext = {
 
 const ThemeContext = createContext<ThemeContext | null>(null);
 
-export function ThemeContextProvider({ children }: TThemeContextProviderProps) {
+export function ThemeContextProvider({ children }: ThemeContextProviderProps) {
   const [theme, setTheme] = useState<ThemeType>('light');
 
   const currentTheme = theme === 'dark' ? 'darkTheme' : 'lightTheme';
