@@ -1,4 +1,4 @@
-import type { PostProps } from '../../../entities/post/types/types.ts';
+import type { PostProps } from '../../../entities/post/model/types.ts';
 
 type FilterByLengthProps = {
   posts: PostProps[];

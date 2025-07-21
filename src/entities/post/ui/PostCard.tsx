@@ -6,7 +6,7 @@ import React, {
   useState,
 } from 'react';
 import styles from './PostCard.module.scss';
-import type { PostProps } from '../types/types.ts';
+import type { PostProps } from '../model/types.ts';
 import { Button } from '../../../shared/ui/Button/Button.tsx';
 import clsx from 'clsx';
 import { CommentList } from '../../../widgets/CommentList/CommentList.tsx';

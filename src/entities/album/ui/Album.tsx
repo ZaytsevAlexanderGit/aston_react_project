@@ -1,5 +1,5 @@
 import styles from './Album.module.scss';
-import type { AlbumProps } from '../types/types';
+import type { AlbumProps } from '../model/types';
 import React, { type FC } from 'react';
 
 type AlbumComponentProps = {

@@ -1,5 +1,5 @@
 import styles from './CommentList.module.scss';
-import type { PostProps } from '../../entities/post/types/types.ts';
+import type { PostProps } from '../../entities/post/model/types.ts';
 import { Comment } from '../../entities/comment/ui/Comment.tsx';
 import { useGetCommentsByPostIdQuery } from '../../entities/comment/api/commentsApi.ts';
 

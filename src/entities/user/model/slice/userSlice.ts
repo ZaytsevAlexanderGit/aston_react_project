@@ -1,5 +1,5 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
-import type { UserProps } from '../../types/types.ts';
+import type { UserProps } from '../types.ts';
 import { usersApi } from '../../api/usersApi.ts';
 import type { AppState } from '../../../../app/providers/store/store.ts';
 

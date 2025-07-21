@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_URL } from '../../../config/api-config.ts';
-import type { CommentProps } from '../types/types.ts';
+import type { CommentProps } from '../model/types.ts';
 
 export const commentsApi = createApi({
   reducerPath: 'commentsApi',

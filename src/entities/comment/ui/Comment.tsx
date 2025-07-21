@@ -1,5 +1,5 @@
 import styles from './Comment.module.scss';
-import type { CommentProps } from '../types/types.ts';
+import type { CommentProps } from '../model/types.ts';
 import React, { type FC } from 'react';
 
 type PostCommentProps = {

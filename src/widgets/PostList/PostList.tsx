@@ -1,7 +1,7 @@
 import styles from './PostList.module.scss';
 import { PostCard } from '../../entities/post/ui/PostCard.tsx';
 import { useCallback, useMemo, useState } from 'react';
-import type { VisibleComments } from '../../entities/post/types/types.ts';
+import type { VisibleComments } from '../../entities/post/model/types.ts';
 import { filterByLength } from '../../features/PostLengthFilter/lib/ filterByLength.ts';
 import { PostLengthFilter } from '../../features/PostLengthFilter/ui/PostLengthFilter .tsx';
 import { useDebounce } from '../../shared/lib/hooks/useDebounce.ts';
