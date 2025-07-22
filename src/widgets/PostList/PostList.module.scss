@@ -1,0 +1,19 @@
+.postListWrapper {
+    display: flex;
+    flex-direction: column;
+    gap:15px;
+}
+
+.postListMain {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    margin-block-start: 10px;
+}
+
+.postList {
+    display: grid;
+    grid-template-columns: repeat(1,  1fr);
+    gap:20px;
+}

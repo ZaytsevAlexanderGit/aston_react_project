@@ -1,0 +1,13 @@
+.layout {
+    min-block-size: calc(100vh - var(--main-layout-padding) * 2);
+    display: grid;
+    justify-items: center;
+    grid-template-rows: auto 1fr auto;
+}
+
+.mainLayout {
+    display: flex;
+    inline-size: 75%;
+    flex-direction: column;
+    gap:30px;
+}

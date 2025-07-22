@@ -1,4 +1,4 @@
-import styles from './ThemeSwitcher.module.css';
+import styles from './ThemeSwitcher.module.scss';
 import clsx from 'clsx';
 import { useTheme } from '../../../shared/lib/theme/ThemeContext';
 

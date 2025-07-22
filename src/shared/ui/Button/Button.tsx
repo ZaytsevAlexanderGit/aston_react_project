@@ -1,8 +1,14 @@
-import styles from './Button.module.css';
+import styles from './Button.module.scss';
 import React, { type SyntheticEvent } from 'react';
 import clsx from 'clsx';
 
-type ButtonType = 'primary' | 'secondary' | 'submit' | 'closeModalCross';
+type ButtonType =
+  | 'primary'
+  | 'secondary'
+  | 'submit'
+  | 'closeModalCross'
+  | 'showComments'
+  | 'showPost';
 
 type ButtonProps = {
   buttonType: ButtonType;

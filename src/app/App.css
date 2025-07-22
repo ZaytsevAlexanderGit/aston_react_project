@@ -1,7 +1,8 @@
 #root {
-  max-width: 1280px;
+  max-inline-size: 1280px;
+  inline-size: 100vw;
   margin: 0 auto;
-  padding: 2rem;
+  padding: var(--main-layout-padding);
   text-align: center;
 }
 

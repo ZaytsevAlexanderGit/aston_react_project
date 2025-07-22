@@ -1,27 +1,29 @@
-import styles from './Modal.module.css';
+import styles from './Modal.module.scss';
 import { createPortal } from 'react-dom';
-import React from 'react';
-import { Button } from '../Button/Button.tsx';
-
-type ModalProps = {
-  children: React.ReactNode;
+import { type PropsWithChildren } from 'react';
+import { type Modal, ModalContext } from '../../lib/modal/ModalContext.tsx';
+import { Title, Body, Footer, CloseButton } from './components';
+type ModalProps = PropsWithChildren & {
+  modal: Modal;
   handleClose: () => void;
 };
 
 const modalElement = document.getElementById('modal') as HTMLElement;
 
-export function Modal({ handleClose, children }: ModalProps) {
+export function Modal({ handleClose, children, modal }: ModalProps) {
   return createPortal(
-    <div onClick={handleClose} className={styles.overlay}>
-      <div onClick={(e) => e.stopPropagation()} className={styles.modal}>
-        <>
-          <Button buttonType={'closeModalCross'} onClick={handleClose}>
-            ✖
-          </Button>
+    <ModalContext.Provider value={{ modal, handleClose }}>
+      <div onClick={handleClose} className={styles.overlay}>
+        <div onClick={(e) => e.stopPropagation()} className={styles.modal}>
           {children}
-        </>
+        </div>
       </div>
-    </div>,
+    </ModalContext.Provider>,
     modalElement
   );
 }
+
+Modal.Title = Title;
+Modal.Body = Body;
+Modal.Footer = Footer;
+Modal.CloseButton = CloseButton;

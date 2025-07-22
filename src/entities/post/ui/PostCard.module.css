@@ -1,8 +1,0 @@
-.postCard {
-    padding:8px;
-    border-radius: 12px;
-    border:1px solid var(--text-color);
-
-    background-color:var(--background-color);
-    color:var(--text-color);
-}

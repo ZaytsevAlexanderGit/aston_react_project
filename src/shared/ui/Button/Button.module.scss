@@ -2,19 +2,22 @@
     inline-size: fit-content;
     background-color: var(--background-color);
     color: var(--text-color);
+
+    font-size: 14px;
+
     padding: 8px 12px;
     border-radius: 8px;
     border:1px solid var(--text-color);
     cursor: pointer;
     transition: box-shadow 0.4s;
-}
 
-.secondary:hover {
-    box-shadow: 2px 2px 2px var(--text-color);
-}
+    &:hover {
+        background-color: var(--button-hover-color);
+    }
 
-.secondary:active{
-    box-shadow: none;
+    &:active {
+        background-color: var(--background-color);
+    }
 }
 
 .closeModalCross {
@@ -24,4 +27,15 @@
     border:none;
     color:var(--text-color);
     background-color:transparent;
+}
+
+.showComments {
+    align-self: end;
+}
+
+.showPost {
+    margin-block-start: 10px;
+    padding:5px;
+    border-radius: 6px;
+    align-self: end;
 }

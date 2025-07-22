@@ -1,0 +1,41 @@
+.postCardListItem {
+    list-style: none;
+}
+
+.postCard {
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+    padding:8px;
+    border-radius: 12px;
+    border:1px solid var(--text-color);
+
+    background-color:var(--background-color);
+    color:var(--text-color);
+}
+
+.postCardBodyWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.postCardBody {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-align: justify;
+    text-indent: 1rem;
+    text-overflow: ellipsis;
+    max-height: 5rem;
+}
+
+.postCardBody__expanded {
+    min-block-size: fit-content;
+    -webkit-line-clamp: none;
+}
+
+.commentsBlockWrapper {
+    display: flex;
+    flex-direction: column;
+}

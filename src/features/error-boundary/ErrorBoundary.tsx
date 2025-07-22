@@ -1,4 +1,4 @@
-import styles from './ErrorBoundary.module.css';
+import styles from './ErrorBoundary.module.scss';
 import React, { type ErrorInfo, type ReactNode } from 'react';
 
 interface ErrorBoundaryProps {
