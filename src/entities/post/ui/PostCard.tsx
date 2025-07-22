@@ -14,6 +14,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { usersSelectors } from '../../user/model/slice/userSlice.ts';
 import type { AppState } from '../../../app/providers/store/store.ts';
+import { useGetUserByIdQuery } from '../../user/api/usersApi.ts';
 
 type PostCardProps = {
   post: PostProps;
@@ -64,18 +65,29 @@ export const PostCard: FC<PostCardProps> = React.memo(function PostCard({
     if (toggleComments) toggleComments(post.id);
   };
 
-  const postAuthor = useSelector(
-    (state: AppState) => usersSelectors.selectById(state, post.userId).name
-  );
+  let postAuthor = useSelector((state: AppState) => {
+    const author = usersSelectors.selectById(state, post.userId);
+    return author ? author.name : undefined;
+  });
+
+  const { data: userData, isLoading } = useGetUserByIdQuery(post.userId!, {
+    skip: !!postAuthor,
+  });
+
+  if (!postAuthor && userData) postAuthor = userData.name;
 
   return (
     <article className={styles.postCard}>
-      <Link
-        to={`/users/${post.userId}/posts`}
-        className={styles.postCard__author}
-      >
-        {postAuthor}
-      </Link>
+      {isLoading ? (
+        <h4>Загрузка...</h4>
+      ) : (
+        <Link
+          to={`/users/${post.userId}/posts`}
+          className={styles.postCard__author}
+        >
+          {postAuthor}
+        </Link>
+      )}
       <div className={styles.postCardWrapper}>
         <div
           onClick={handlePostClick}

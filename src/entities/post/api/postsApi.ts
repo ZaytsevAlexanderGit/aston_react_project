@@ -23,7 +23,7 @@ export const postsApi = createApi({
         return result ? [{ type: 'Post', id: id }] : [];
       },
     }),
-    getPostsByUserId: build.query<PostProps[], string>({
+    getPostsByUserId: build.query<PostProps[], number>({
       query: (userId) => `users/${userId}/posts`,
       providesTags: (result, error, id) => {
         if (error) {
