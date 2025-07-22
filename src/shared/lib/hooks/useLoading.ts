@@ -9,6 +9,5 @@ export const useLoading = () => {
     (state: AppState) => state.users.usersLoading
   );
 
-  if (postLoading === 'loading' || usersLoading === 'loading') return true;
-  else return false;
+  return postLoading === 'loading' || usersLoading === 'loading';
 };

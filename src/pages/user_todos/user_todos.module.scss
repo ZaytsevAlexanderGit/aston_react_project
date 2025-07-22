@@ -15,6 +15,7 @@
   background-color: var(--background-color);
   border-radius: 8px;
   padding: 1rem;
+  border:1px solid black;
 }
 
 .todoItem {
@@ -25,4 +26,5 @@
   background-color: var(--comment-background-color);
   padding:10px;
   gap:20px;
+  border:1px solid black;
 }

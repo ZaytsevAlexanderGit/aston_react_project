@@ -13,7 +13,7 @@ export const usersApi = createApi({
       query: () => 'users/',
       providesTags: ['Users'],
     }),
-    getUserById: build.query<UserProps, string>({
+    getUserById: build.query<UserProps, number>({
       query: (userId) => `users/${userId}`,
       providesTags: (result, error, id) => {
         if (error) {

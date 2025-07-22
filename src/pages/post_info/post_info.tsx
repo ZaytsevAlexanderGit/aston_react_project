@@ -5,7 +5,7 @@ import { Button } from '../../shared/ui/Button/Button.tsx';
 import { useSelector } from 'react-redux';
 import type { AppState } from '../../app/providers/store/store.ts';
 import { postsSelectors } from '../../entities/post/model/slice/postSlice.ts';
-import { useLoading } from '../../shared/lib/hooks/useLoading.ts';
+import { useGetPostByIdQuery } from '../../entities/post/api/postsApi.ts';
 
 export const PostInfoPage = () => {
   const { id } = useParams();
@@ -13,17 +13,21 @@ export const PostInfoPage = () => {
 
   if (id === undefined) navigate(-1);
 
-  const loading = useLoading();
-
-  const post = useSelector((state: AppState) =>
+  let post = useSelector((state: AppState) =>
     postsSelectors.selectById(state, +id!)
   );
+
+  const { data: postData, isLoading } = useGetPostByIdQuery(id!, {
+    skip: post !== undefined,
+  });
+
+  if (!post && postData) post = postData;
 
   const handleBack = () => {
     navigate(-1);
   };
 
-  return loading ? (
+  return isLoading ? (
     <h3>Загрузка...</h3>
   ) : post !== undefined ? (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>

@@ -16,6 +16,7 @@
   background-color: var(--background-color);
   border-radius: 8px;
   padding: 0.5rem;
+  border:1px solid black;
 }
 
 .photoItem {
@@ -27,6 +28,7 @@
   background-color: var(--comment-background-color);
   padding:10px;
   inline-size: 22vw;
+  border:1px solid black;
 
   @media (max-width:1080px) {
     inline-size: 33vw;

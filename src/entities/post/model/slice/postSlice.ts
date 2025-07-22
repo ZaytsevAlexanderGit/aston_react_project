@@ -21,9 +21,9 @@ export const postSlice = createSlice({
         }
       )
       .addMatcher(
-        postsApi.endpoints.getPostById.matchFulfilled,
+        postsApi.endpoints.getPostsByUserId.matchFulfilled,
         (state, action) => {
-          postsAdapter.upsertOne(state, action.payload);
+          postsAdapter.upsertMany(state, action.payload);
           if (state.postsLoading === 'loading') state.postsLoading = 'idle';
         }
       );
