@@ -1,6 +1,6 @@
 export type PostCommentProps = {
   id: string;
   commentText: string;
-  author: string;
+  authorId: string;
   date: Date;
 };

@@ -1,0 +1,42 @@
+.photoListWrapper {
+  padding:1rem 0 0;
+  align-self: center;
+}
+
+.photoList {
+  list-style: none;
+  display: flex;
+  flex-basis: fit-content;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap:10px;
+  background-color: var(--background-color);
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+
+.photoItem {
+  border-radius: 8px;
+  inline-size: fit-content;
+  background-color: var(--comment-background-color);
+  padding:10px;
+}
+
+.photoImage {
+  border-radius: 8px;
+  inline-size: 22vw;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+
+  @media (max-width:1080px) {
+    inline-size: 33vw;
+  }
+
+  @media (max-width:750px) {
+    inline-size: 66vw;
+  }
+}
+
+.photoTitle {
+  color: var(--text-color);
+}

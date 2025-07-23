@@ -1,11 +1,11 @@
 .switcherWrapper {
     position:absolute;
-    right:1rem;
+    right:0;
     top:0;
 
-    @media (max-width: 1000px) {
-        right: 1rem;
-        top: -1.25rem;
+    @media (max-width: 800px) {
+        right: 0;
+        top: -1rem;
     }
 }
 

@@ -1,10 +1,6 @@
 /*------------------------------Theme Variables-----------------*/
 :root {
-  --background-color: #d1d1d1;
-  --text-color: #242424;
-  --modal-background-color: #a39898;
   --main-layout-padding: 2rem;
-  --button-hover-color: #d2d2d2;
 }
 
 /*------------------------------Default Styles------------------*/
@@ -12,6 +8,7 @@
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  overflow-x:hidden;
 
   color-scheme: light dark;
 
@@ -33,14 +30,17 @@
 .darkTheme {
   --background-color: #252525;
   --text-color: white;
+  --text-color-hover: rgba(210, 210, 210, 0.8);
   --modal-background-color: #252525;
-  --button-hover-color: rgba(210, 210, 210, 0.2);
-
+  --button-hover-color: rgb(100, 100, 100);
+  --comment-background-color: #3c3c3c;
 }
 
 .lightTheme {
   --background-color: white;
+  --text-color-hover:  rgba(45, 45, 45, 0.8);
   --text-color: black;
   --modal-background-color: white;
   --button-hover-color: rgba(45, 45, 45, 0.2);
+  --comment-background-color:#d3d3d3;
 }

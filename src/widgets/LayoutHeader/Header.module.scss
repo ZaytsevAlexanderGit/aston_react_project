@@ -1,13 +1,20 @@
 .headerWrapper {
-    inline-size: 100%;
+    inline-size: 75vw;
     position: relative;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     gap:15px;
     
-    @media (max-width: 1000px) {
+    @media (max-width: 1050px) {
         flex-direction: column;
         gap:5px;
     }
+}
+
+.modalText {
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+    gap:5px;
 }

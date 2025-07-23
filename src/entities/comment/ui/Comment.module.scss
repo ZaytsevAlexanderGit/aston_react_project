@@ -1,3 +1,8 @@
+.commentsBlock__comment_text {
+  justify-self: start;
+  text-align: start;
+}
+
 .commentsBlock__comment_other {
   display: flex;
   font-size: 12px;
@@ -5,7 +10,12 @@
   gap:10px;
 }
 
-.commentsBlock__comment_text {
-  justify-self: start;
-  text-align: start;
+.commentsBlock__comment__author {
+  text-decoration: none;
+  font-weight: 700;
+  color: inherit;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
