@@ -8,7 +8,7 @@ export type Modal = {
 
 type ModalContext = {
   modal: Modal;
-  handleClose?: () => void;
+  handleClose: () => void;
 };
 
 export const ModalContext = createContext<ModalContext | undefined>(undefined);
