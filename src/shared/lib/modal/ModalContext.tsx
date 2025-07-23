@@ -1,14 +1,14 @@
 import { createContext, type ReactNode, useContext } from 'react';
 
 export type Modal = {
-  title: ReactNode | string;
-  body: ReactNode | string;
-  footer: ReactNode | string;
+  title?: ReactNode | string;
+  body?: ReactNode | string;
+  footer?: ReactNode | string;
 };
 
 type ModalContext = {
   modal: Modal;
-  handleClose: () => void;
+  handleClose?: () => void;
 };
 
 export const ModalContext = createContext<ModalContext | undefined>(undefined);

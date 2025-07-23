@@ -1,6 +1,6 @@
 import styles from './Album.module.scss';
 import type { AlbumProps } from '../types/types';
-import  { type FC } from 'react';
+import { type FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 type AlbumComponentProps = {
@@ -14,17 +14,8 @@ export const Album: FC<AlbumComponentProps> = ({ album }) => {
   };
 
   return (
-    <li
-      onClick={navigateToPhotosHandler}
-      className={styles.albumsItem}
-      key={album.id}
-    >
-      {/*<img*/}
-      {/*  className={styles.albumCover}*/}
-      {/*  src={album.albumCover}*/}
-      {/*  alt={album.albumTitle}*/}
-      {/*/>*/}
-      <h3 className={styles.albumsItemTitle}>{album.albumTitle}</h3>
+    <li onClick={navigateToPhotosHandler} className={styles.albumsItem}>
+      <h3 className={styles.albumsItemTitle}>{album.title}</h3>
     </li>
   );
 };

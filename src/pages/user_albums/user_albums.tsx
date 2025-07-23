@@ -19,7 +19,7 @@ export const UserPageAlbums = () => {
     <div className={styles.albumsListWrapper}>
       <ul className={styles.albumsList}>
         {userAlbums.map((album) => (
-          <Album album={album} />
+          <Album album={album} key={album.id} />
         ))}
       </ul>
     </div>

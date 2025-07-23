@@ -15,24 +15,3 @@
   padding: 0.5rem;
   border:1px solid black;
 }
-
-.albumsItem {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--comment-background-color);
-  padding:10px;
-  cursor:pointer;
-  border-radius: 8px;
-  border:1px solid black;
-  inline-size: 22vw;
-  block-size: 150px;
-
-  @media (max-width:1080px) {
-    inline-size: 33vw;
-  }
-
-  @media (max-width:750px) {
-    inline-size: 66vw;
-  }
-}
