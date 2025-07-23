@@ -1,8 +1,8 @@
-import { PostList } from '../../widgets/PostList/PostList.tsx';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { postsSelectors } from '../../entities/post/model/slice/postSlice.ts';
 import { useGetPostsByUserIdQuery } from '../../entities/post/api/postsApi.ts';
+import PostList from '../../widgets/PostList/PostList.tsx';
 
 export const UserPagePosts = () => {
   const { id: userId } = useParams();

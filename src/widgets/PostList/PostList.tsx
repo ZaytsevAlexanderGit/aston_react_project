@@ -13,7 +13,7 @@ type PostListProps = {
   userId?: number | undefined;
 };
 
-export const PostList = ({ userId }: PostListProps) => {
+const PostList = ({ userId }: PostListProps) => {
   let posts = useSelector(postsSelectors.selectAll);
 
   if (userId) {
@@ -70,3 +70,5 @@ export const PostList = ({ userId }: PostListProps) => {
     </div>
   );
 };
+
+export default PostList;
