@@ -7,7 +7,7 @@ import { Button } from '../../shared/ui/Button/Button.tsx';
 import { Photo } from '../../entities/photo/ui/Photo.tsx';
 
 type PhotosListProps = {
-  albumId: string | undefined;
+  albumId: string;
 };
 
 export const PhotosList = ({ albumId }: PhotosListProps) => {
@@ -22,9 +22,9 @@ export const PhotosList = ({ albumId }: PhotosListProps) => {
         albumNameRef.current = location.state.albumName;
       } else setShouldFetch(true);
     }
-  }, [shouldFetch]);
+  }, [shouldFetch, location.state]);
 
-  const { data: albumData } = useGetAlbumByIdQuery(albumId!, {
+  const { data: albumData } = useGetAlbumByIdQuery(albumId, {
     skip: !shouldFetch,
   });
 
@@ -33,9 +33,8 @@ export const PhotosList = ({ albumId }: PhotosListProps) => {
     setShouldFetch(false);
   }
 
-  const { data: albumPhotos = [], isLoading } = useGetPhotosByAlbumIdQuery(
-    albumId!
-  );
+  const { data: albumPhotos = [], isLoading } =
+    useGetPhotosByAlbumIdQuery(albumId);
 
   const handleBack = () => {
     navigate(-1);

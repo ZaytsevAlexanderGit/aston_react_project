@@ -20,7 +20,7 @@ export const postsApi = createApi({
         if (error) {
           console.error('Error occurred while loading post:', error);
         }
-        return result ? [{ type: 'Post', id: id }] : [];
+        return result ? [{ type: 'Post', id }] : [];
       },
     }),
     getPostsByUserId: build.query<PostProps[], number>({
@@ -29,7 +29,7 @@ export const postsApi = createApi({
         if (error) {
           console.error('Error occurred while loading posts:', error);
         }
-        return result ? [{ type: 'Posts', id: id }] : [];
+        return result ? [{ type: 'Posts', id }] : [];
       },
     }),
   }),

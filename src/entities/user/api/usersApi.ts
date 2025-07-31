@@ -19,7 +19,7 @@ export const usersApi = createApi({
         if (error) {
           console.error('Error occurred while loading user:', error);
         }
-        return result ? [{ type: 'User', id: id }] : [];
+        return result ? [{ type: 'User', id }] : [];
       },
     }),
   }),

@@ -1,11 +1,8 @@
-import { useNavigate, useParams } from 'react-router-dom';
 import { TodosList } from '../../widgets/TodosList/TodosList.tsx';
+import { useSafeParams } from '../../shared/lib/hooks/useSafeParams.ts';
 
 export const UserPageTodos = () => {
-  const { id: userId } = useParams();
-  const navigate = useNavigate();
-
-  if (!userId) navigate('/posts');
+  const { id: userId } = useSafeParams(['id']);
 
   return <TodosList userId={userId} />;
 };

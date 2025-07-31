@@ -9,11 +9,11 @@ import { useSelector } from 'react-redux';
 import { postsSelectors } from '../../entities/post/model/slice/postSlice.ts';
 
 type PostListProps = {
-  userId?: number | undefined;
+  userId?: number;
 };
 
 const PostList = ({ userId }: PostListProps) => {
-  let posts = useSelector(postsSelectors.selectAll);
+  let posts = useSelector(postsSelectors.selectAllPosts);
 
   if (userId) {
     posts = posts.filter((post) => post.userId === +userId);

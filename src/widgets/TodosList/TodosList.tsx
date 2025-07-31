@@ -3,11 +3,11 @@ import styles from './TodosList.module.scss';
 import { Todo } from '../../entities/todo/ui/Todo.tsx';
 
 type TodosListProps = {
-  userId: string | undefined;
+  userId: string;
 };
 
 export const TodosList = ({ userId }: TodosListProps) => {
-  const { data: userTodos = [], isLoading } = useGetTodosByUserIdQuery(userId!);
+  const { data: userTodos = [], isLoading } = useGetTodosByUserIdQuery(userId);
 
   return isLoading ? (
     <h3>Загрузка...</h3>

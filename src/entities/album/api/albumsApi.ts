@@ -19,7 +19,7 @@ export const albumsApi = createApi({
         if (error) {
           console.error('Error occurred while loading album:', error);
         }
-        return result ? [{ type: 'Album', id: id }] : [];
+        return result ? [{ type: 'Album', id }] : [];
       },
     }),
     getAlbumsByUserId: build.query<AlbumProps[], string>({
@@ -28,7 +28,7 @@ export const albumsApi = createApi({
         if (error) {
           console.error('Error occurred while loading albums:', error);
         }
-        return result ? [{ type: 'Albums', id: id }] : [];
+        return result ? [{ type: 'Albums', id }] : [];
       },
     }),
   }),

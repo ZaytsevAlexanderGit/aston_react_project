@@ -11,9 +11,7 @@ import { Button } from '../../../shared/ui/Button/Button.tsx';
 import clsx from 'clsx';
 import { CommentList } from '../../../widgets/CommentList/CommentList.tsx';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { usersSelectors } from '../../user/model/slice/userSlice.ts';
-import type { AppState } from '../../../app/providers/store/store.ts';
+import { getUserById } from '../../user/model/slice/userSlice.ts';
 import { useGetUserByIdQuery } from '../../user/api/usersApi.ts';
 
 type PostCardProps = {
@@ -44,7 +42,7 @@ export const PostCard: FC<PostCardProps> = React.memo(function PostCard({
 
   useEffect(() => {
     if (contentRef.current) {
-      if (id !== undefined) {
+      if (id) {
         setShowButton(false);
         setExpanded(true);
       } else {
@@ -53,7 +51,7 @@ export const PostCard: FC<PostCardProps> = React.memo(function PostCard({
         setShowButton(isTruncated);
       }
     }
-  }, [post.body]);
+  }, [post.body, id]);
 
   const toggleExpandHandler = (e: SyntheticEvent<Element, Event>) => {
     e.stopPropagation();
@@ -65,12 +63,10 @@ export const PostCard: FC<PostCardProps> = React.memo(function PostCard({
     if (toggleComments) toggleComments(post.id);
   };
 
-  let postAuthor = useSelector((state: AppState) => {
-    const author = usersSelectors.selectById(state, post.userId);
-    return author ? author.name : undefined;
-  });
+  const author = getUserById(post.userId);
+  let postAuthor = author ? author.name : undefined;
 
-  const { data: userData, isLoading } = useGetUserByIdQuery(post.userId!, {
+  const { data: userData, isLoading } = useGetUserByIdQuery(post.userId, {
     skip: !!postAuthor,
   });
 

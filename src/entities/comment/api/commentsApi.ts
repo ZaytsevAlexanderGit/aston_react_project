@@ -19,7 +19,7 @@ export const commentsApi = createApi({
         if (error) {
           console.error('Error occurred while loading comment:', error);
         }
-        return result ? [{ type: 'Comments', id: id }] : [];
+        return result ? [{ type: 'Comments', id }] : [];
       },
     }),
     getCommentsByPostId: build.query<CommentProps[], number>({
@@ -28,7 +28,7 @@ export const commentsApi = createApi({
         if (error) {
           console.error('Error occurred while loading comments:', error);
         }
-        return result ? [{ type: 'Comments', id: id }] : [];
+        return result ? [{ type: 'Comments', id }] : [];
       },
     }),
   }),

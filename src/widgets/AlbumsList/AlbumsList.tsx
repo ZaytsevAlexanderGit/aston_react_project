@@ -4,13 +4,12 @@ import { useGetAlbumsByUserIdQuery } from '../../entities/album/api/albumsApi.ts
 import { Album } from '../../entities/album/ui/Album.tsx';
 
 type AlbumsListProps = {
-  userId: string | undefined;
+  userId: string;
 };
 
 export const AlbumsList = ({ userId }: AlbumsListProps) => {
-  const { data: userAlbums = [], isLoading } = useGetAlbumsByUserIdQuery(
-    userId!
-  );
+  const { data: userAlbums = [], isLoading } =
+    useGetAlbumsByUserIdQuery(userId);
 
   return isLoading ? (
     <h3>Загрузка...</h3>

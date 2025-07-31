@@ -1,23 +1,17 @@
 import styles from './UserLayout.module.scss';
 import { UserTabs } from '../../../widgets/UserTab/UserTabs.tsx';
-import { Navigate, Outlet, useNavigate, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import type { AppState } from '../../../app/providers/store/store.ts';
-import { usersSelectors } from '../../../entities/user/model/slice/userSlice.ts';
+import { Navigate, Outlet } from 'react-router-dom';
+import { getUserById } from '../../../entities/user/model/slice/userSlice.ts';
 import { useGetUserByIdQuery } from '../../../entities/user/api/usersApi.ts';
+import { useSafeParams } from '../../lib/hooks/useSafeParams.ts';
 
 export const UserLayout = () => {
-  const { id: userId } = useParams();
-  const navigate = useNavigate();
+  const { id: userId } = useSafeParams(['id']);
 
-  if (userId === undefined) navigate('/posts');
+  const user = getUserById(+userId);
+  let userName = user ? user.name : undefined;
 
-  let userName = useSelector((state: AppState) => {
-    const user = usersSelectors.selectById(state, +userId!);
-    return user ? user.name : undefined;
-  });
-
-  const { data: userData, isLoading } = useGetUserByIdQuery(+userId!, {
+  const { data: userData, isLoading } = useGetUserByIdQuery(+userId, {
     skip: !!userName,
   });
 
