@@ -1,11 +1,8 @@
-import { useNavigate, useParams } from 'react-router-dom';
 import { AlbumsList } from '../../widgets/AlbumsList/AlbumsList.tsx';
+import { useSafeParams } from '../../shared/lib/hooks/useSafeParams.ts';
 
 export const UserPageAlbums = () => {
-  const { id: userId } = useParams();
-  const navigate = useNavigate();
-
-  if (!userId) navigate('/posts');
+  const { id: userId } = useSafeParams(['id']);
 
   return <AlbumsList userId={userId} />;
 };

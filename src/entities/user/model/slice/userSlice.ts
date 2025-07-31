@@ -1,5 +1,9 @@
-import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 import type { UserProps } from '../types.ts';
+import {
+  createEntityAdapter,
+  createSlice,
+  type EntityState,
+} from '@reduxjs/toolkit';
 import { usersApi } from '../../api/usersApi.ts';
 import type { AppState } from '../../../../app/providers/store/store.ts';
 
@@ -7,10 +11,25 @@ export const usersAdapter = createEntityAdapter<UserProps>({
   sortComparer: (a, b) => a.id - b.id,
 });
 
+interface UsersState extends EntityState<UserProps, number> {
+  usersLoading: string;
+}
+
+const initialState: UsersState = usersAdapter.getInitialState({
+  usersLoading: 'loading',
+});
+
+const userSelectors = usersAdapter.getSelectors();
+
 export const userSlice = createSlice({
   name: 'users',
-  initialState: usersAdapter.getInitialState({ usersLoading: 'loading' }),
+  initialState: initialState,
   reducers: {},
+  selectors: {
+    selectAllUsers: (state) => userSelectors.selectAll(state),
+    selectUsersEntities: (state) => userSelectors.selectEntities(state),
+    selectUserById: (state, id: number) => userSelectors.selectById(state, id),
+  },
   extraReducers: (builder) => {
     builder
       .addMatcher(
@@ -30,6 +49,7 @@ export const userSlice = createSlice({
   },
 });
 
-export const usersSelectors = usersAdapter.getSelectors(
-  (state: AppState) => state.users
-);
+export const usersSelectors = userSlice.selectors;
+
+export const getUserById = (id: number) => (state: AppState) =>
+  usersSelectors.selectUserById(state, id);

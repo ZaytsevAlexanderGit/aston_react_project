@@ -1,4 +1,8 @@
-import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
+import {
+  createEntityAdapter,
+  createSlice,
+  type EntityState,
+} from '@reduxjs/toolkit';
 import type { PostProps } from '../types.ts';
 import { postsApi } from '../../api/postsApi.ts';
 import type { AppState } from '../../../../app/providers/store/store.ts';
@@ -7,10 +11,25 @@ export const postsAdapter = createEntityAdapter<PostProps>({
   sortComparer: (a, b) => a.id - b.id,
 });
 
+interface PostsState extends EntityState<PostProps, number> {
+  postsLoading: string;
+}
+
+const initialState: PostsState = postsAdapter.getInitialState({
+  postsLoading: 'loading',
+});
+
+const postSelectors = postsAdapter.getSelectors();
+
 export const postSlice = createSlice({
   name: 'posts',
-  initialState: postsAdapter.getInitialState({ postsLoading: 'loading' }),
+  initialState: initialState,
   reducers: {},
+  selectors: {
+    selectAllPosts: (state) => postSelectors.selectAll(state),
+    selectPostsEntities: (state) => postSelectors.selectEntities(state),
+    selectPostById: (state, id: number) => postSelectors.selectById(state, id),
+  },
   extraReducers: (builder) => {
     builder
       .addMatcher(
@@ -30,6 +49,7 @@ export const postSlice = createSlice({
   },
 });
 
-export const postsSelectors = postsAdapter.getSelectors(
-  (state: AppState) => state.posts
-);
+export const postsSelectors = postSlice.selectors;
+
+export const getPostById = (id: number) => (state: AppState) =>
+  postsSelectors.selectPostById(state, id);

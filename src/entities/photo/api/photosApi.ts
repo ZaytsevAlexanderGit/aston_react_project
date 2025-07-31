@@ -18,7 +18,7 @@ export const photosApi = createApi({
         if (error) {
           console.error('Error occurred while loading photos:', error);
         }
-        return result ? [{ type: 'Photos', id: id }] : [];
+        return result ? [{ type: 'Photos', id }] : [];
       },
     }),
   }),

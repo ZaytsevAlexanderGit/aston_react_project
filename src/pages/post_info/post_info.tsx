@@ -1,24 +1,20 @@
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { Routes } from '../../app/providers/router/routes.ts';
 import { PostCard } from '../../entities/post/ui/PostCard.tsx';
 import { Button } from '../../shared/ui/Button/Button.tsx';
 import { useSelector } from 'react-redux';
-import type { AppState } from '../../app/providers/store/store.ts';
-import { postsSelectors } from '../../entities/post/model/slice/postSlice.ts';
+import { getPostById } from '../../entities/post/model/slice/postSlice.ts';
 import { useGetPostByIdQuery } from '../../entities/post/api/postsApi.ts';
+import { useSafeParams } from '../../shared/lib/hooks/useSafeParams.ts';
 
 export const PostInfoPage = () => {
-  const { id } = useParams();
+  const { id } = useSafeParams(['id']);
   const navigate = useNavigate();
 
-  if (id === undefined) navigate(-1);
+  let post = useSelector(getPostById(+id));
 
-  let post = useSelector((state: AppState) =>
-    postsSelectors.selectById(state, +id!)
-  );
-
-  const { data: postData, isLoading } = useGetPostByIdQuery(id!, {
-    skip: post !== undefined,
+  const { data: postData, isLoading } = useGetPostByIdQuery(id, {
+    skip: !!post,
   });
 
   if (!post && postData) post = postData;
@@ -29,7 +25,7 @@ export const PostInfoPage = () => {
 
   return isLoading ? (
     <h3>Загрузка...</h3>
-  ) : post !== undefined ? (
+  ) : post ? (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
       <Button buttonType={'secondary'} onClick={handleBack} children={'←'} />
       <PostCard post={post} showComments={true} />

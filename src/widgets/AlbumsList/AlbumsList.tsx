@@ -5,13 +5,12 @@ import { Album } from '../../entities/album/ui/Album.tsx';
 import { ItemList } from '../../shared/ui/ItemList/ItemList.tsx';
 
 type AlbumsListProps = {
-  userId: string | undefined;
+  userId: string;
 };
 
 export const AlbumsList = ({ userId }: AlbumsListProps) => {
-  const { data: userAlbums = [], isLoading } = useGetAlbumsByUserIdQuery(
-    userId!
-  );
+  const { data: userAlbums = [], isLoading } =
+    useGetAlbumsByUserIdQuery(userId);
 
   return isLoading ? (
     <h3>Загрузка...</h3>

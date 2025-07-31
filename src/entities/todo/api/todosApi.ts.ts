@@ -19,7 +19,7 @@ export const todosApi = createApi({
         if (error) {
           console.error('Error occurred while loading todo:', error);
         }
-        return result ? [{ type: 'Todo', id: id }] : [];
+        return result ? [{ type: 'Todo', id }] : [];
       },
     }),
     getTodosByUserId: build.query<TodoProps[], string>({
@@ -28,7 +28,7 @@ export const todosApi = createApi({
         if (error) {
           console.error('Error occurred while loading todos:', error);
         }
-        return result ? [{ type: 'Todos', id: id }] : [];
+        return result ? [{ type: 'Todos', id }] : [];
       },
     }),
   }),

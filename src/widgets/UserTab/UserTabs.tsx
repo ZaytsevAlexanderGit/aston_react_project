@@ -1,9 +1,10 @@
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styles from './UserTabs.module.scss';
 import clsx from 'clsx';
+import { useSafeParams } from '../../shared/lib/hooks/useSafeParams.ts';
 
 export const UserTabs = () => {
-  const { id } = useParams();
+  const { id } = useSafeParams(['id']);
 
   const isActiveLinkClassName = ({ isActive }: { isActive: boolean }) =>
     clsx(styles.userTabsLink, isActive && styles.userTabsLinkActive);
