@@ -1,5 +1,5 @@
 import styles from './Photo.module.scss';
-import type { PhotoProps } from '../types/types.ts';
+import type { PhotoProps } from '../model/types.ts';
 import React, { type FC, useState } from 'react';
 import { Modal } from '../../../shared/ui/Modal/Modal.tsx';
 

@@ -1,6 +1,6 @@
 import styles from './Todo.module.scss';
 import clsx from 'clsx';
-import type { TodoProps } from '../types/types.ts';
+import type { TodoProps } from '../model/types.ts';
 import React, { type FC } from 'react';
 
 type TodoComponentProps = {

@@ -1,12 +1,6 @@
-import React, {
-  type FC,
-  type SyntheticEvent,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { type FC, useEffect, useRef, useState } from 'react';
 import styles from './PostCard.module.scss';
-import type { PostProps } from '../types/types.ts';
+import type { PostProps } from '../model/types.ts';
 import { Button } from '../../../shared/ui/Button/Button.tsx';
 import clsx from 'clsx';
 import { CommentList } from '../../../widgets/CommentList/CommentList.tsx';
@@ -28,7 +22,7 @@ export const PostCard: FC<PostCardProps> = React.memo(function PostCard({
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const handlePostClick = (e: SyntheticEvent) => {
+  const handlePostClick = (e: React.MouseEvent<HTMLElement>) => {
     if (!id) {
       e.preventDefault();
       e.stopPropagation();
@@ -53,12 +47,12 @@ export const PostCard: FC<PostCardProps> = React.memo(function PostCard({
     }
   }, [post.body, id]);
 
-  const toggleExpandHandler = (e: SyntheticEvent<Element, Event>) => {
+  const toggleExpandHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     setExpanded(!expanded);
   };
 
-  const toggleCommentsHandler = (e: SyntheticEvent<Element, Event>) => {
+  const toggleCommentsHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     if (toggleComments) toggleComments(post.id);
   };

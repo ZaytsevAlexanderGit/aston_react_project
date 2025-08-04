@@ -1,6 +1,7 @@
 import { useGetTodosByUserIdQuery } from '../../entities/todo/api/todosApi.ts.ts';
 import styles from './TodosList.module.scss';
 import { Todo } from '../../entities/todo/ui/Todo.tsx';
+import { ItemList } from '../../shared/ui/ItemList/ItemList.tsx';
 
 type TodosListProps = {
   userId: string;
@@ -13,13 +14,17 @@ export const TodosList = ({ userId }: TodosListProps) => {
     <h3>Загрузка...</h3>
   ) : (
     <div className={styles.todosListWrapper}>
-      <ul className={styles.todosList}>
-        {userTodos.map((todo) => (
-          <li className={styles.todoItem} key={todo.id}>
+      <ItemList
+        items={userTodos}
+        keyExtractor={(todo) => todo.id}
+        container={'ul'}
+        extClassName={styles.todosList}
+        renderItem={(todo) => (
+          <li className={styles.todoItem}>
             <Todo todo={todo} />
           </li>
-        ))}
-      </ul>
+        )}
+      />
     </div>
   );
 };

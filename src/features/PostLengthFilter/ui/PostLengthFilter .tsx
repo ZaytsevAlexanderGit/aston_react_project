@@ -25,7 +25,7 @@ export const PostLengthFilter = ({
           id="titleLength"
           type="range"
           min="0"
-          max="50"
+          max="500"
           value={titleLength}
           onChange={setLengthFilterHandler}
         />

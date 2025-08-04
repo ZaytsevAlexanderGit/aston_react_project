@@ -3,7 +3,7 @@ import {
   createSlice,
   type EntityState,
 } from '@reduxjs/toolkit';
-import type { PostProps } from '../../types/types.ts';
+import type { PostProps } from '../types.ts';
 import { postsApi } from '../../api/postsApi.ts';
 import type { AppState } from '../../../../app/providers/store/store.ts';
 

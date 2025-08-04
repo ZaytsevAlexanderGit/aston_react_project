@@ -1,12 +1,13 @@
 import styles from './PostList.module.scss';
 import { PostCard } from '../../entities/post/ui/PostCard.tsx';
 import { useCallback, useMemo, useState } from 'react';
-import type { VisibleComments } from '../../entities/post/types/types.ts';
+import type { VisibleComments } from '../../entities/post/model/types.ts';
 import { filterByLength } from '../../features/PostLengthFilter/lib/ filterByLength.ts';
 import { PostLengthFilter } from '../../features/PostLengthFilter/ui/PostLengthFilter .tsx';
 import { useDebounce } from '../../shared/lib/hooks/useDebounce.ts';
 import { useSelector } from 'react-redux';
 import { postsSelectors } from '../../entities/post/model/slice/postSlice.ts';
+import { ItemList } from '../../shared/ui/ItemList/ItemList.tsx';
 
 type PostListProps = {
   userId?: number;
@@ -46,10 +47,14 @@ const PostList = ({ userId }: PostListProps) => {
           setTitleLength={setTitleLength}
         />
       </div>
-      <ul className={styles.postList}>
-        {filteredPosts.length > 0 ? (
-          filteredPosts.map((post) => (
-            <li key={post.id} className={styles.postCardListItem}>
+      {filteredPosts.length > 0 ? (
+        <ItemList
+          items={filteredPosts}
+          keyExtractor={(post) => post.id}
+          container={'ul'}
+          extClassName={styles.postList}
+          renderItem={(post) => (
+            <li className={styles.postCardListItem}>
               <PostCard
                 key={post.id}
                 post={post}
@@ -57,11 +62,11 @@ const PostList = ({ userId }: PostListProps) => {
                 toggleComments={toggleComments}
               />
             </li>
-          ))
-        ) : (
-          <h4>У данного пользователя нет постов</h4>
-        )}
-      </ul>
+          )}
+        />
+      ) : (
+        <h4>Нет постов удовлетворяющих фильтру</h4>
+      )}
     </div>
   );
 };

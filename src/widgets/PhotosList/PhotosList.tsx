@@ -5,6 +5,7 @@ import { useGetAlbumByIdQuery } from '../../entities/album/api/albumsApi.ts';
 import { useGetPhotosByAlbumIdQuery } from '../../entities/photo/api/photosApi.ts';
 import { Button } from '../../shared/ui/Button/Button.tsx';
 import { Photo } from '../../entities/photo/ui/Photo.tsx';
+import { ItemList } from '../../shared/ui/ItemList/ItemList.tsx';
 
 type PhotosListProps = {
   albumId: string;
@@ -48,13 +49,17 @@ export const PhotosList = ({ albumId }: PhotosListProps) => {
       ) : albumPhotos.length ? (
         <div className={styles.photoListWrapper}>
           <h3>{albumNameRef.current}</h3>
-          <ul className={styles.photoList}>
-            {albumPhotos.map((photo) => (
-              <li className={styles.photoItem} key={photo.id}>
+          <ItemList
+            items={albumPhotos}
+            keyExtractor={(photo) => photo.id}
+            container={'ul'}
+            extClassName={styles.photoList}
+            renderItem={(photo) => (
+              <li className={styles.photoItem}>
                 <Photo photo={photo} />
               </li>
-            ))}
-          </ul>
+            )}
+          />
         </div>
       ) : (
         <Navigate to={'/posts'} />

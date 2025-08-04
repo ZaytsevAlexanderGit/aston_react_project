@@ -1,5 +1,5 @@
 import styles from './Button.module.scss';
-import React, { type SyntheticEvent } from 'react';
+import React, { type PropsWithChildren } from 'react';
 import clsx from 'clsx';
 
 type ButtonType =
@@ -10,10 +10,9 @@ type ButtonType =
   | 'showComments'
   | 'showPost';
 
-type ButtonProps = {
+type ButtonProps = PropsWithChildren & {
   buttonType: ButtonType;
-  onClick: (event: SyntheticEvent) => void;
-  children: React.ReactNode;
+  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 export function Button({ buttonType, onClick, children }: ButtonProps) {
