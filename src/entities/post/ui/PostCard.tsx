@@ -11,12 +11,13 @@ import { Button } from '../../../shared/ui/Button/Button.tsx';
 import clsx from 'clsx';
 import { CommentList } from '../../../widgets/CommentList/CommentList.tsx';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { getCommentAuthorName } from '../../../shared/lib/utils.ts';
+import { getUserById } from '../../user/model/slice/userSlice.ts';
+import { useGetUserByIdQuery } from '../../user/api/usersApi.ts';
 
 type PostCardProps = {
   post: PostProps;
   showComments: boolean;
-  toggleComments?: (postId: string) => void;
+  toggleComments?: (postId: number) => void;
 };
 
 export const PostCard: FC<PostCardProps> = React.memo(function PostCard({
@@ -41,7 +42,7 @@ export const PostCard: FC<PostCardProps> = React.memo(function PostCard({
 
   useEffect(() => {
     if (contentRef.current) {
-      if (id !== undefined) {
+      if (id) {
         setShowButton(false);
         setExpanded(true);
       } else {
@@ -50,7 +51,7 @@ export const PostCard: FC<PostCardProps> = React.memo(function PostCard({
         setShowButton(isTruncated);
       }
     }
-  }, [post.postBody]);
+  }, [post.body, id]);
 
   const toggleExpandHandler = (e: SyntheticEvent<Element, Event>) => {
     e.stopPropagation();
@@ -62,16 +63,27 @@ export const PostCard: FC<PostCardProps> = React.memo(function PostCard({
     if (toggleComments) toggleComments(post.id);
   };
 
-  const postAuthor = getCommentAuthorName({ id: post.authorId });
+  const author = getUserById(post.userId);
+  let postAuthor = author ? author.name : undefined;
+
+  const { data: userData, isLoading } = useGetUserByIdQuery(post.userId, {
+    skip: !!postAuthor,
+  });
+
+  if (!postAuthor && userData) postAuthor = userData.name;
 
   return (
     <article className={styles.postCard}>
-      <Link
-        to={`/users/${post.authorId}/posts`}
-        className={styles.postCard__author}
-      >
-        {postAuthor}
-      </Link>
+      {isLoading ? (
+        <h4>Загрузка...</h4>
+      ) : (
+        <Link
+          to={`/users/${post.userId}/posts`}
+          className={styles.postCard__author}
+        >
+          {postAuthor}
+        </Link>
+      )}
       <div className={styles.postCardWrapper}>
         <div
           onClick={handlePostClick}
@@ -88,7 +100,7 @@ export const PostCard: FC<PostCardProps> = React.memo(function PostCard({
               expanded ? styles.postCardBody__expanded : ''
             )}
           >
-            {post.postBody}
+            {post.body}
           </p>
         </div>
         {showButton && (

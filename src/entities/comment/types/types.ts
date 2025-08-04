@@ -1,6 +1,7 @@
-export type PostCommentProps = {
-  id: string;
-  commentText: string;
-  authorId: string;
-  date: Date;
+export type CommentProps = {
+  postId: number;
+  id: number;
+  name: string;
+  email: string;
+  body: string;
 };

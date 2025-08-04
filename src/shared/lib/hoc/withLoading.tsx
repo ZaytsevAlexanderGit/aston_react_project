@@ -1,20 +1,17 @@
-import { type ComponentType, useEffect, useState } from 'react';
+import { type ComponentType } from 'react';
+import { useLoading } from '../hooks/useLoading.ts';
 
-export function withLoading<P extends object>(
-  WrappedComponent: ComponentType<P>
-): ComponentType<P> {
+type withLoadingProps = {
+  WrappedComponent: ComponentType;
+};
+
+export function withLoading<P extends object>({
+  WrappedComponent,
+}: withLoadingProps): ComponentType<P> {
+  const loading = useLoading();
+
   return (props: P) => {
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-      const timer = setTimeout(() => {
-        setIsLoading(false);
-      }, 2000);
-
-      return () => clearTimeout(timer);
-    }, []);
-
-    if (isLoading) {
+    if (loading) {
       return <div>Загрузка...</div>;
     }
 

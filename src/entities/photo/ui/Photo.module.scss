@@ -1,0 +1,10 @@
+.photoImage {
+  border-radius: 8px;
+  object-fit: cover;
+  inline-size: 200px;
+  aspect-ratio: 1/1;
+}
+
+.photoTitle {
+  color: var(--text-color);
+}

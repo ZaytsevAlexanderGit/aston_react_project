@@ -7,6 +7,8 @@ export const Header = () => {
   const [showModal, setShowModal] = useState(false);
 
   const handleToggleModal = () => {
+    document.documentElement.style.overflow =
+      document.documentElement.style.overflow === 'hidden' ? 'auto' : 'hidden';
     setShowModal((prev) => !prev);
   };
 

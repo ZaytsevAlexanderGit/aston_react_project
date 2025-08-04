@@ -1,22 +1,23 @@
 import styles from './PostList.module.scss';
 import { PostCard } from '../../entities/post/ui/PostCard.tsx';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import type { VisibleComments } from '../../entities/post/types/types.ts';
 import { filterByLength } from '../../features/PostLengthFilter/lib/ filterByLength.ts';
 import { PostLengthFilter } from '../../features/PostLengthFilter/ui/PostLengthFilter .tsx';
 import { useDebounce } from '../../shared/lib/hooks/useDebounce.ts';
-import { usePosts } from '../../features/PostList/model/hooks/usePosts.ts';
+import { useSelector } from 'react-redux';
+import { postsSelectors } from '../../entities/post/model/slice/postSlice.ts';
 
 type PostListProps = {
-  userId?: string;
+  userId?: number;
 };
 
 const PostList = ({ userId }: PostListProps) => {
-  useEffect(() => {
-    // Для будущего получения данных по api
-  }, []);
+  let posts = useSelector(postsSelectors.selectAllPosts);
 
-  const posts = usePosts({ userId });
+  if (userId) {
+    posts = posts.filter((post) => post.userId === +userId);
+  }
 
   const [titleLength, setTitleLength] = useState<number>(0);
 
@@ -29,7 +30,7 @@ const PostList = ({ userId }: PostListProps) => {
 
   const [visibleComments, setVisibleComments] = useState<VisibleComments>({});
 
-  const toggleComments = useCallback((postId: string) => {
+  const toggleComments = useCallback((postId: number) => {
     setVisibleComments((prev) => ({
       ...prev,
       [postId]: !prev[postId],

@@ -1,17 +1,8 @@
-import styles from './user_albums.module.scss';
-import { defaultAlbumsData } from '../../shared/lib/constants.ts';
-import { Album } from '../../entities/album/ui/Album.tsx';
+import { AlbumsList } from '../../widgets/AlbumsList/AlbumsList.tsx';
+import { useSafeParams } from '../../shared/lib/hooks/useSafeParams.ts';
 
 export const UserPageAlbums = () => {
-  const userAlbums = defaultAlbumsData;
+  const { id: userId } = useSafeParams(['id']);
 
-  return (
-    <div className={styles.albumsListWrapper}>
-      <ul className={styles.albumsList}>
-        {userAlbums.map((album) => (
-          <Album album={album} />
-        ))}
-      </ul>
-    </div>
-  );
+  return <AlbumsList userId={userId} />;
 };
